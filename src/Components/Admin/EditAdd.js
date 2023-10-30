@@ -1,6 +1,35 @@
-import React from "react";
+import { useEffect, useState, useContext } from "react";
+import { useParams } from "react-router-dom";
+
+import DataContext from "../../Context/DataProvider";
 
 const EditAdd = () => {
+  let { setFeed, feed } = useContext(DataContext);
+
+  let { id } = useParams();
+  let [product, setProduct] = useState({
+    id: "",
+    name: "",
+    brand: "",
+    price: "",
+    image: "",
+    description: "",
+  });
+
+  useEffect(() => {
+    if (id) {
+      let [getEditedItem] = feed.filter((itm) => itm.id == id);
+      setProduct((preVal) => ({
+        ...preVal,
+        id: getEditedItem.id,
+        name: getEditedItem.name,
+        brand: getEditedItem.brand,
+        price: getEditedItem.price,
+        image: getEditedItem.image,
+        description: getEditedItem.description,
+      }));
+    }
+  }, []);
   return (
     <div>
       <div class="input-group m-2">
@@ -10,6 +39,7 @@ const EditAdd = () => {
           name="product-name"
           aria-label="First name"
           class="form-control"
+          value={product.name}
         />
       </div>
 
@@ -20,6 +50,7 @@ const EditAdd = () => {
           name="product-price"
           aria-label="First name"
           class="form-control"
+          value={product.price}
         />
       </div>
 
@@ -30,6 +61,7 @@ const EditAdd = () => {
           name="product-image"
           aria-label="First name"
           class="form-control"
+          value={product.image}
         />
       </div>
 
@@ -40,6 +72,7 @@ const EditAdd = () => {
           name="product-des"
           aria-label="First name"
           class="form-control"
+          value={product.description}
         />
       </div>
 

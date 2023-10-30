@@ -61,8 +61,8 @@ const Login = () => {
             name="role"
             value={handleLogin.role}
           >
-            <option value={"admin"}>Admin</option>
-            <option value={"user"}>User</option>
+            <option value={1}>Admin</option>
+            <option value={2}>User</option>
           </select>
 
           <button onClick={handleSubmit} className="btn btn-primary">

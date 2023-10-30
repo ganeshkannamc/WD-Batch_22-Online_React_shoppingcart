@@ -53,7 +53,7 @@ export const DataProvider = ({ children }) => {
   let [handleLogin, setHandleLogin] = useState({
     username: "",
     password: "",
-    role: "",
+    role: 2,
     isActive: false,
   });
 

@@ -11,6 +11,7 @@ import LoginLayout from "./LoginLayout";
 import { useState, useContext } from "react";
 import EditAdd from "./Components/Admin/EditAdd";
 import { Route, Routes } from "react-router-dom";
+import UserAuth from "./UserAuth";
 
 function App() {
   // let products = [
@@ -83,12 +84,19 @@ function App() {
 
         <Route path="/" element={<Layout />}>
           <Route element={<Auth />}>
-            <Route path="products" element={<ProductList />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="admin" element={<Admin />} />
-            <Route path="admin/edit" element={<EditAdd />} />
-            <Route path="admin/add" element={<EditAdd />} />
-            {/* <Route path="/*" element={<CompA />} /> */}
+
+            <Route element={<UserAuth allowedRoles={[1, 2]} />}>
+              <Route path="products" element={<ProductList />} />
+              <Route path="cart" element={<Cart />} />
+            </Route>
+
+            <Route element={<UserAuth allowedRoles={[1]} />}>
+              <Route path="admin" element={<Admin />} />
+              <Route path="admin/edit/:id" element={<EditAdd />} />
+              <Route path="admin/add" element={<EditAdd />} />
+              {/* <Route path="/*" element={<CompA />} /> */}
+            </Route>
+            
           </Route>
         </Route>
         <Route path="/*" element={<CompA />} />
