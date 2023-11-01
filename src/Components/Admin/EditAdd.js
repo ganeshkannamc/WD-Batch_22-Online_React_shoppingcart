@@ -30,15 +30,71 @@ const EditAdd = () => {
       }));
     }
   }, []);
+
+  function handleEditSubmit() {
+    let updatedProducts;
+    if (id) {
+      updatedProducts = feed.map((itm) => {
+        if (itm.id == id) {
+          itm.name = product.name;
+          itm.price = product.price;
+          itm.brand = product.brand;
+          itm.image = product.image;
+          itm.description = product.description;
+          itm.AddedToCart = false;
+          itm.cartCount = 0;
+        }
+        return itm;
+      });
+      console.log("Edit", product);
+      setFeed(updatedProducts);
+    }
+    if (!id) {
+      let randomId = Math.floor(Math.random() * 100);
+      let newProduct = {
+        id: randomId,
+        brand: product.brand,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        description: product.description,
+        isAddedToCart: false,
+        cartCount: 0,
+      };
+      setFeed((preVal) => [...preVal, newProduct]);
+      console.log("New", newProduct);
+    }
+  }
+
+  function handleInputChange(eve) {
+    setProduct((preVal) => ({
+      ...preVal,
+      [eve.target.name]: eve.target.value,
+    }));
+  }
+
   return (
     <div>
+      <div class="input-group m-2">
+        <span class="input-group-text">Brand</span>
+        <input
+          type="text"
+          name="brand"
+          aria-label="First name"
+          class="form-control"
+          onChange={handleInputChange}
+          value={product.brand}
+        />
+      </div>
+
       <div class="input-group m-2">
         <span class="input-group-text">Product name</span>
         <input
           type="text"
-          name="product-name"
+          name="name"
           aria-label="First name"
           class="form-control"
+          onChange={handleInputChange}
           value={product.name}
         />
       </div>
@@ -47,9 +103,10 @@ const EditAdd = () => {
         <span class="input-group-text">Product price</span>
         <input
           type="text"
-          name="product-price"
+          name="price"
           aria-label="First name"
           class="form-control"
+          onChange={handleInputChange}
           value={product.price}
         />
       </div>
@@ -58,9 +115,10 @@ const EditAdd = () => {
         <span class="input-group-text">Product image</span>
         <input
           type="text"
-          name="product-image"
+          name="image"
           aria-label="First name"
           class="form-control"
+          onChange={handleInputChange}
           value={product.image}
         />
       </div>
@@ -69,15 +127,23 @@ const EditAdd = () => {
         <span class="input-group-text">Product description</span>
         <textarea
           type="text-area"
-          name="product-des"
+          name="description"
           aria-label="First name"
           class="form-control"
+          onChange={handleInputChange}
           value={product.description}
         />
       </div>
-
-      <button className="btn btn-primary m-2">Add</button>
-      <button className="btn btn-primary m-2">Save</button>
+      {id && (
+        <button className="btn btn-primary m-2" onClick={handleEditSubmit}>
+          Save
+        </button>
+      )}
+      {!id && (
+        <button className="btn btn-primary m-2" onClick={handleEditSubmit}>
+          Add
+        </button>
+      )}
     </div>
   );
 };

@@ -14,7 +14,12 @@ const Admin = () => {
   }
   return (
     <div>
-      <button className="btn btn-primary m-1">Create</button>
+      <button
+        className="btn btn-primary m-1"
+        onClick={() => pageNavigate("/admin/add")}
+      >
+        Create
+      </button>
       <table className="table table-bordered">
         <thead>
           <tr>

@@ -5,7 +5,7 @@ import DataContext from "../../Context/DataProvider";
 
 const ProductList = () => {
   let { setFeed, feed } = useContext(DataContext);
-
+console.log(feed)
   return (
     <div className="d-flex flex-row flex-wrap">
       {/* { name, price, image, description } */}
