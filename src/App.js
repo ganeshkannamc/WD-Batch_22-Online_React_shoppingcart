@@ -71,7 +71,7 @@ function App() {
 
   // let get = useContext(DataContext);
   // console.log(get)
-
+  
   return (
     <div className="container-fluid App">
       {/* <Header /> */}
@@ -84,7 +84,6 @@ function App() {
 
         <Route path="/" element={<Layout />}>
           <Route element={<Auth />}>
-
             <Route element={<UserAuth allowedRoles={[1, 2]} />}>
               <Route path="products" element={<ProductList />} />
               <Route path="cart" element={<Cart />} />
@@ -96,7 +95,6 @@ function App() {
               <Route path="admin/add" element={<EditAdd />} />
               {/* <Route path="/*" element={<CompA />} /> */}
             </Route>
-            
           </Route>
         </Route>
         <Route path="/*" element={<CompA />} />
