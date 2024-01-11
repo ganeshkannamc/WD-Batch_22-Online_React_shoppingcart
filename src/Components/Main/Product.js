@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardHeader from "@mui/material/CardHeader";
+import { useEffect } from "react";
 
 const Product = ({
   id,
@@ -16,6 +17,8 @@ const Product = ({
   setFeed,
   feed,
 }) => {
+  
+
   function handleAddToCart(eve) {
     let productId = eve.target.id;
     let updatedFeed = feed.map((itm) => {

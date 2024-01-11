@@ -1,10 +1,32 @@
 import Product from "./Product";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import DataContext from "../../Context/DataProvider";
 
 const ProductList = () => {
   let { setFeed, feed } = useContext(DataContext);
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  async function getProducts() {
+    const getAcessToken = sessionStorage.getItem("accesstoken");
+    console.log("getAcessToken", getAcessToken);
+    let response = await fetch("http://localhost:3000/allproducts", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${getAcessToken}`,
+      },
+    });
+    
+    if (response.ok) {
+      let data = await response.json();
+      console.log("------", data);
+    }
+  }
+
   return (
     <div className="d-flex flex-row flex-wrap">
       {/* { name, price, image, description } */}
